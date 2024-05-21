@@ -26,5 +26,12 @@ class Person:
 ```python
 from protonbites import get_schema
 
+# Get and save the schema
 schema = get_schema(Person)
+schema.save("bugatti.proton")
+
+# Load from disk
+# schema = get_schema("bugatti.proton")
 ```
+
+
