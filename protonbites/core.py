@@ -1,7 +1,7 @@
 import ast
 import gzip
 import struct
-from typing import Any, Tuple, TypeGuard, Union
+from typing import Any, Callable, Tuple, TypeGuard, Union
 
 from .types import PythonBackendDataTypes
 from .datatypes import (
@@ -155,16 +155,31 @@ def decode(__c: bytes, /) -> PythonBackendDataTypes:
     char: bytes = data[0]
 
     if char == START or char == ARRAY_HEAD:
-        data = data[1:-1]
-        obj = []
+        i = 1
+        depths = [0 if char == START else 1]
+        d = bytes()
+        items = []
 
-        for item in b"".join(data).split(SPLITTER):
-            if not item:
+        while i < len(data) and len(depths) > 0:
+            char = data[i]
+
+            if char == START:
+                depths.append(0)
+            elif char == ARRAY_HEAD:
+                depths.append(1)
+            elif char == END:
+                assert depths.pop() == 0
+            elif char == ARRAY_NIL:
+                assert depths.pop() == 1
+            elif char == SPLITTER and len(depths) == 1:
+                items.append(decode(d))
+                i += 1
+                d = bytes()
                 continue
 
-            obj.append(decode(bytes(item)))
-
-        return obj
+            d += char
+            i += 1
+        return items
 
     item = __c
     header = chr(item[0]).encode("utf-8")
