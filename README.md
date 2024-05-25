@@ -12,6 +12,20 @@ class Person:
     age: int
 ```
 
+> For floats and ints, you can use `typing.Annotated[int, '<dtype>']` where `<dtype>` is the desired datatype.
+> Below are the avilable dtypes:
+> 
+> **ints**
+> - int8 / uint8
+> - int16 / uint16
+> - int32 / uint32
+> - int64 / uint64
+> 
+> **floats**
+> - float32
+> - float64
+
+
 **Step 2.** Create a schema from the dataclass.
 
 ```python
