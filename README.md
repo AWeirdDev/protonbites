@@ -95,6 +95,8 @@ encode({
 })
 ```
 
+<br />
+
 ### <kbd>def</kbd> decode
 
 ```python
@@ -118,12 +120,29 @@ b = decoded_safely(a)
 reveal_type(b)  # list (type_checking)
 ```
 
+<br />
+
 ### <kbd>def</kbd> get_schema
 
-```rust
-get_schema(__dc: type[T], /) -> Schema[T]
+```python
+def get_schema(__dc: type[T], /) -> Schema[T]
+```
+
+<details>
+    <summary><code>where T:</code></summary>
+<p>
+
+```haskell
 where T: DataclassProtocol
 ```
+
+```python
+T = TypeVar('T', bound=DataclassProtocol)
+# get_schema(__dc: type[T@get_schema], /) -> Schema[T@get_schema]
+```
+
+</p>
+</details>
 
 **Args:**
 - \_\_dc: The dataclass.
