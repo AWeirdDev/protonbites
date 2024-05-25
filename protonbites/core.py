@@ -1,7 +1,7 @@
 import ast
 import gzip
 import struct
-from typing import Any, Callable, Tuple, TypeGuard, Union
+from typing import Any, Tuple, TypeGuard, Union
 
 from .types import PythonBackendDataTypes
 from .datatypes import (
