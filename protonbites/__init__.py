@@ -1,4 +1,4 @@
-from .core import encode, decode, encode_number, decode_number
+from .core import encode, decode, encode_number, decode_number, decoded_safely
 from .schema import Schema, SchemaMapping, get_schema
 from .datatypes import (
     int8,
@@ -18,6 +18,7 @@ __all__ = (
     "decode",
     "encode_number",
     "decode_number",
+    "decoded_safely",
     "Schema",
     "SchemaMapping",
     "get_schema",
