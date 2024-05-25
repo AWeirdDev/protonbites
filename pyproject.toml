@@ -1,0 +1,30 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "protonbites"
+version = "0.1"
+description = "Most sane way to store JSON data. Simple, light, strongly-typed and secure. (Probably, overall)"
+keywords = ["protonbites", "proton", "bytes", "encode", "decode", "json", "protobuf", "encoder", "decoder", "schema"]
+authors = [
+  { name = "AWeirdDev", email = "aweirdscratcher@gmail.com" },
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.9"
+dependencies = []
+
+[project.urls]
+"Source" = "https://github.com/AWeirdDev/protonbites"
+"Bug Tracker" = "https://github.com/AWeirdDev/protonbites/issues"
+
+[tool.setuptools]
+packages = [
+    "protonbites"
+]

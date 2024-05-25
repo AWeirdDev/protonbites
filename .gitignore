@@ -1,3 +1,5 @@
 test.py
 **/__pycache__/
 .ruff_cache/
+protonbites.egg-info/
+dist/
