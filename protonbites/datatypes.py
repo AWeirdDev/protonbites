@@ -1,36 +1,93 @@
-import struct
+# Objects
+from typing import Generic, TypeVar, Union
 
 
-class Number:
-    fmt: str
-    v: int
+START = b"\x01"
+END = b"\x02"
 
-    def __init_subclass__(cls, fmt: str) -> None:
-        cls.fmt = fmt
+# List
+ARRAY_HEAD = b"\x03"
+ARRAY_NIL = b"\x04"
 
-    def __init__(self, v: int):
+# Raw data
+INT8 = b"\x05"
+UINT8 = b"\x08"
+INT16 = b"\x06"
+UINT16 = b"\x09"
+INT32 = b"\x07"
+UINT32 = b"\x0a"
+INT64 = b"\x0b"
+UINT64 = b"\x0c"
+
+FLOAT32 = b"\x0e"
+FLOAT64 = b"\x1e"
+
+INTS = {INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64}
+FLOATS = {FLOAT32, FLOAT64}
+
+# Booleans
+TRUE = b"\x1b"
+FALSE = b"\x1c"
+
+# Strings
+STRING = b"\x0f"
+
+# Splitter
+SPLITTER = b"\x11"
+
+DATATYPES = {
+    "int8",
+    "uint8",
+    "int16",
+    "uint16",
+    "int32",
+    "uint32",
+    "int64",
+    "uint64",
+    "float32",
+    "float64",
+}
+
+T = TypeVar("T", bound=Union[int, float])
+
+
+class Proton(Generic[T]):
+    dt: str
+    v: T
+
+    def __init_subclass__(cls, dt: str) -> None:
+        assert dt in DATATYPES
+        cls.dt = dt
+
+    def __init__(self, v: T):
         self.v = v
 
-    def pack(self) -> bytes:
-        return struct.pack(self.fmt, self.v)
+
+class int8(Proton[int], dt="int8"): ...
 
 
-class Int8(Number, fmt="b"): ...
+class uint8(Proton[int], dt="uint8"): ...
 
 
-class Uint8(Number, fmt="B"): ...
+class int16(Proton[int], dt="int16"): ...
 
 
-class Int16(Number, fmt="h"): ...
+class uint16(Proton[int], dt="uint16"): ...
 
 
-class Uint16(Number, fmt="H"): ...
+class int32(Proton[int], dt="int32"): ...
 
 
-class Int32(Number, fmt="i"): ...
+class uint32(Proton[int], dt="uint32"): ...
 
 
-class Uint32(Number, fmt="I"): ...
+class int64(Proton[int], dt="int64"): ...
 
 
-DATATYPES = {"int8", "uint8", "int16", "uint16", "int32", "uint32"}
+class uint64(Proton[int], dt="uint64"): ...
+
+
+class float32(Proton[float], dt="float32"): ...
+
+
+class float64(Proton[float], dt="float64"): ...
