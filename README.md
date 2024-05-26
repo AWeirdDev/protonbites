@@ -157,6 +157,8 @@ schema = get_schema()
 schema.encode(Person(name="Jesse Pinkman", age=28))
 ```
 
+<br />
+
 <details>
 <summary>Were you looking for Mr. Penguin?</summary>
 <p>
